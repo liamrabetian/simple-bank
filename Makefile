@@ -9,14 +9,17 @@ createdb:
 dropdb:
 	docker exec -it postgres dropdb simple_bank
 
-migrateup:
+migrate:
+	migrate create -ext sql -dir db/migration -seq "$(name)"
+
+upgrade:
 	migrate -path db/migration -database "$(DB_URL)" -verbose up
 
-migratedown:
+downgrade:
 	migrate -path db/migration -database "$(DB_URL)" -verbose down
 
 sqlc:
 	sqlc generate
 
 
-.PHONY: postgres createdb dropdb migrateup migratedown sqlc
+.PHONY: postgres createdb dropdb upgrade downgrade migrate sqlc
