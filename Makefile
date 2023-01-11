@@ -21,5 +21,7 @@ downgrade:
 sqlc:
 	sqlc generate
 
+test:
+	go test -v -cover ./... 
 
-.PHONY: postgres createdb dropdb upgrade downgrade migrate sqlc
+.PHONY: postgres createdb dropdb upgrade downgrade migrate sqlc, test
